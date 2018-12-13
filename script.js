@@ -1,27 +1,96 @@
 
+var markFam = {
+	bills: [77, 375, 110, 45],
+	markTips: [],
+	markTotals: [],
+	tipCalc: function() {
+		
+		for (var i = 0; i < this.bills.length; i++) {
+			var bill = this.bills[i];
+			if (bill < 100) {
+				var tip = bill * .2;
+				this.markTips.push(tip);
+				this.markTotals.push(tip + bill);
+			} else if (bill >= 100 && bill < 300){
+				var tip = bill * .10;
+				this.markTips.push(tip);
+				this.markTotals.push(tip + bill);
+			} else {
+				var tip = bill * .25;
+				this.markTips.push(tip);
+				this.markTotals.push(tip + bill);
+			}
+		}
+		console.log(this.markTips, this.markTotals);
+	}
+}
+
+
 var johnFam = {
 	bills: [124, 48, 268, 180, 42],
 	tipCalc: function() {
-		var allTips = [];
-		var totalAmounts = [];
-		var bills = johnFam.bills;
-		for (var i = 0; i < bills.length; i++) {
-			if (bills[i] < 50) {
-				var tip = bills[i] * .2;
-				allTips.push(tip);
-				totalAmounts.push(tip + bills[i]);
-			} else if (bills[i] >= 50 && bills[i] < 200){
-				var tip = bills[i] * .15;
-				allTips.push(tip);
-				totalAmounts.push(tip + bills[i]);
+		// Refactored version
+		this.johnTips = [];
+		this.johnTotals = [];
+	
+		for (var i = 0; i < this.bills.length; i++) {
+			var bill = this.bills[i];
+			var percent;
+			
+			if (bill < 50) {
+				percent = .2;
+			} else if (bill >= 50 && bill < 200){
+				percent = .15;
 			} else {
-				var tip = bills[i] * .10;
-				allTips.push(tip);
-				totalAmounts.push(tip + bills[i]);
+				percent = .10;
 			}
+			this.johnTips[i] = bill * percent;
+			this.johnTotals[i] = bill + bill * percent;
 		}
-		console.log(allTips, totalAmounts);
+		console.log(this.johnTips, this.johnTotals);
 	}
 }
 
 johnFam.tipCalc();
+markFam.tipCalc();
+
+var aveTips = function(famBills) {
+	var currentSum = 0;
+	for (var i = 0; i < famBills.length; i++) {
+		currentSum = currentSum + famBills[i];
+	}
+	return currentSum / famBills.length;
+}
+
+johnFam.average = aveTips(johnFam.johnTips);
+markFam.average = aveTips(markFam.markTips);
+
+if (johnFam.average > markFam.average) {
+	console.log('John has the highest average');
+} else if (markFam.average > johnFam.average) {
+	console.log('Mark has the highest average');
+} else {
+	console.log('they have the same average');
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
