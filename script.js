@@ -51,9 +51,6 @@ var johnFam = {
 	}
 }
 
-johnFam.tipCalc();
-markFam.tipCalc();
-
 var aveTips = function(famBills) {
 	var currentSum = 0;
 	for (var i = 0; i < famBills.length; i++) {
@@ -61,6 +58,8 @@ var aveTips = function(famBills) {
 	}
 	return currentSum / famBills.length;
 }
+johnFam.tipCalc();
+markFam.tipCalc();
 
 johnFam.average = aveTips(johnFam.johnTips);
 markFam.average = aveTips(markFam.markTips);
@@ -72,6 +71,7 @@ if (johnFam.average > markFam.average) {
 } else {
 	console.log('they have the same average');
 }
+
 
 
 
